@@ -35,22 +35,18 @@ void sieve(){
     }
 }
 
-
 // Smallest prime of every number
 ll firstPrime[N+5];
 void sieve(){
-    memset(firstPrime,0,sizeof(firstPrime));
-    firstPrime[0]=firstPrime[1]=1;
+    memset(firstPrime,-1,sizeof(firstPrime));
     for(ll i=2;i*i<=N;i++){
-        if(firstPrime[i]==0){
-            firstPrime[i]=i;
-            for(ll j=i;j<=N;j+=i){
-                if(firstPrime[j]==0)firstPrime[j] = i;
+        if(firstPrime[i]==-1){
+            for(ll j=2*i;j<=N;j+=i){
+                if(firstPrime[j]==-1)firstPrime[j] = i;
             }
         }
     }
 }
-
 
 int main(){
     
