@@ -5,49 +5,49 @@
 using namespace std;
 using namespace __gnu_pbds;
 #define w(x)                int x;cin>>x;while(x-->0)
-#define ll                  long long int
+#define int                  long long int
 #define inf                 1e18
 #define mod                 1000000007
 #define arin(a)             for (auto &it : a) cin >> it;
-#define dbg(ar,st,ed)       for(ll i=st;i<=ed;i++)cout<<ar[i]<<" ";cout<<endl;
+#define dbg(ar,st,ed)       for(int i=st;i<=ed;i++)cout<<ar[i]<<" ";cout<<endl;
 #define endl               "\n"
 #define ff                  first
 #define ss                  second
-typedef tree<ll,null_type,less<ll>,rb_tree_tag,tree_order_statistics_node_update> ordered_set;
-typedef tree<ll,null_type,less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_multiset;
+typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update> ordered_set;
+typedef tree<int,null_type,less_equal<int>, rb_tree_tag,tree_order_statistics_node_update> ordered_multiset;
 
 
-const ll N = 1000005;
-vector<ll> primes;//prime numbers vector
+const int N = 1000005;
+vector<int> primes;//prime numbers vector
 bool isPrime[N];  //CheckPrime
 void sieve(){
     memset(isPrime,true,sizeof(isPrime));
     isPrime[0]=isPrime[1]=0;
-    for(ll i=2;i*i<=N;i++){
+    for(int i=2;i*i<=N;i++){
         if(isPrime[i]){
-            for(ll j=2*i;j<=N;j+=i){
+            for(int j=2*i;j<=N;j+=i){
                 isPrime[j] = false;
             }
         }
     }
-    for(ll i=2;i<=N;i++){
+    for(int i=2;i<=N;i++){
         if(isPrime[i])primes.push_back(i);
     }
 }
 
-// Smallest prime of every number
-ll firstPrime[N+5];
+// Smaintest prime of every number
+int firstPrime[N+5];
 void sieve(){
     memset(firstPrime,-1,sizeof(firstPrime));
-    for(ll i=2;i*i<=N;i++){
+    for(int i=2;i*i<=N;i++){
         if(firstPrime[i]==-1){
-            for(ll j=2*i;j<=N;j+=i){
+            for(int j=2*i;j<=N;j+=i){
                 if(firstPrime[j]==-1)firstPrime[j] = i;
             }
         }
     }
 }
 
-int main(){
+int32_t main(){
     
 }
