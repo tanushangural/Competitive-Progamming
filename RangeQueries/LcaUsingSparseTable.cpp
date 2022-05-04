@@ -5,21 +5,19 @@
 using namespace std;
 using namespace __gnu_pbds;
 #define w(x)                int x;cin>>x;while(x-->0)
-#define ll                  long long int
+#define int                  long long int
 #define inf                 1e18
 #define mod                 1000000007
 #define arin(a)             for (auto &it : a) cin >> it;
-#define dbg(ar,st,ed)       for(ll i=st;i<=ed;i++)cout<<ar[i]<<" ";cout<<endl;
+#define dbg(ar,st,ed)       for(int i=st;i<=ed;i++)cout<<ar[i]<<" ";cout<<endl;
 #define endl               "\n"
 #define ff                  first
 #define ss                  second
-typedef tree<ll,null_type,less<ll>,rb_tree_tag,tree_order_statistics_node_update> ordered_set;
-typedef tree<ll,null_type,less_equal<ll>, rb_tree_tag,tree_order_statistics_node_update> ordered_multiset;
 
-void dfs(vector<ll> adj[],ll node,ll par,ll dep,vector<ll>& depth,vector<vector<ll>>& parents){
+void dfs(vector<int> adj[],int node,int par,int dep,vector<int>& depth,vector<vector<int>>& parents){
     depth[node]=dep;
     parents[node][0]=par;
-    ll i=1;
+    int i=1;
     while((1<<i)<dep){
         parents[node][i]=parents[parents[node][i-1]][i-1];
         i+=1;
@@ -31,11 +29,11 @@ void dfs(vector<ll> adj[],ll node,ll par,ll dep,vector<ll>& depth,vector<vector<
     }
 }
 
-ll lca(ll u,ll v,vector<ll>& depth,vector<vector<ll>>& parents){
+int lca(int u,int v,vector<int>& depth,vector<vector<int>>& parents){
     if(depth[u]<depth[v])swap(u,v);
-    ll diff = depth[u]-depth[v];
+    int diff = depth[u]-depth[v];
 
-    ll mask = (1<<20);
+    int mask = (1<<20);
     while(mask>0){
         if(diff&mask){
             u = parents[u][log2(diff&mask)];
@@ -43,10 +41,10 @@ ll lca(ll u,ll v,vector<ll>& depth,vector<vector<ll>>& parents){
         mask>>=1;
     }
     while(u!=v){
-        ll low=0,high=log2(depth[u]-1);
-        ll ans=high;
+        int low=0,high=log2(depth[u]-1);
+        int ans=high;
         while(low<=high){
-            ll mid = low + (high-low)/2;
+            int mid = low + (high-low)/2;
             if(parents[u][mid]==parents[v][mid]){
                 ans=mid;
                 high=mid-1;
@@ -66,19 +64,19 @@ ll lca(ll u,ll v,vector<ll>& depth,vector<vector<ll>>& parents){
 }
 
 void solve(){
-    ll n,q;cin>>n>>q;
-    vector<ll> adj[n+1];
-    for(ll i=0;i<n-1;i++){
-        ll u,v;cin>>u>>v;
+    int n,q;cin>>n>>q;
+    vector<int> adj[n+1];
+    for(int i=0;i<n-1;i++){
+        int u,v;cin>>u>>v;
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
-    vector<ll> depth(n+1);
-    vector<vector<ll>> parents(n+1,vector<ll>(25));
+    vector<int> depth(n+1);
+    vector<vector<int>> parents(n+1,vector<int>(25));
     dfs(adj,1,0,1,depth,parents);
     while(q-->0){
-        ll u,v;cin>>u>>v;
-        ll Lca = lca(u,v,depth,parents);
+        int u,v;cin>>u>>v;
+        int Lca = lca(u,v,depth,parents);
         cout<<Lca<<endl;
     }
 }
